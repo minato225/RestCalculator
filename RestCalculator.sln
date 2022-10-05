@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32819.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestCalculator", "RestCalculator\RestCalculator.csproj", "{212DCCED-3058-487F-AC70-07A5EF1219B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestCalculator.Test", "RestCalculator.Test\RestCalculator.Test.csproj", "{BED34617-4DAC-40D2-8225-C91CBD57F144}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{212DCCED-3058-487F-AC70-07A5EF1219B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{212DCCED-3058-487F-AC70-07A5EF1219B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{212DCCED-3058-487F-AC70-07A5EF1219B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{212DCCED-3058-487F-AC70-07A5EF1219B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BED34617-4DAC-40D2-8225-C91CBD57F144}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BED34617-4DAC-40D2-8225-C91CBD57F144}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BED34617-4DAC-40D2-8225-C91CBD57F144}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BED34617-4DAC-40D2-8225-C91CBD57F144}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {40B61671-CE50-408B-97C0-6ED6C021D5E5}
+	EndGlobalSection
+EndGlobal
