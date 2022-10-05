@@ -24,7 +24,7 @@ namespace RestCalculator.Services
 
         public double Subtract(double a, double b)
         {
-            return b - a;
+            return a - b;
         }
     }
 }

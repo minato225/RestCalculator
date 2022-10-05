@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RestCalculator.Model;
 using RestCalculator.Services;
 using System;
 
@@ -17,10 +18,8 @@ namespace RestCalculator.Controllers
         public IActionResult Add(double a, double b)
         {
             var result = CalculatorService.Add(a, b);
-            return Ok(new
-            {
-                Result = result
-            });
+            var calcResult = new CalculatorResult(result);
+            return Ok(calcResult);
         }
 
         [HttpGet("Div")]
@@ -37,30 +36,24 @@ namespace RestCalculator.Controllers
                 return BadRequest(new { message = e.Message });
             }
 
-            return Ok(new
-            {
-                Result = result
-            });
+            var calcResult = new CalculatorResult(result);
+            return Ok(calcResult);
         }
 
         [HttpGet("Sub")]
         public IActionResult Subtract(double a, double b)
         {
             var result = CalculatorService.Subtract(a, b);
-            return Ok(new
-            {
-                Result = result
-            });
+            var calcResult = new CalculatorResult(result);
+            return Ok(calcResult);
         }
 
         [HttpGet("Mul")]
         public IActionResult Multiply(double a, double b)
         {
             var result = CalculatorService.Multiply(a, b);
-            return Ok(new
-            {
-                Result = result
-            });
+            var calcResult = new CalculatorResult(result);
+            return Ok(calcResult);
         }
 
     }
