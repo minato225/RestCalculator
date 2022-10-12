@@ -69,7 +69,7 @@ namespace RestCalculator.IntegrationTest
             var mockCalculatorService = new Mock<ICalculator>();
             mockCalculatorService
                 .Setup(_ => _.Add(It.IsAny<double>(), It.IsAny<double>()))
-                .ReturnsAsync(2);
+                .ReturnsAsync(It.IsAny<double>());
 
             var calculatorController = new CalculatorController(mockCalculatorService.Object);
 
