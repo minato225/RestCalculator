@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Any;
 using Moq;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
+using RestCalculator.Controllers;
+using RestCalculator.Model;
 using RestCalculator.Services;
 using System;
 using System.Linq;
@@ -58,6 +60,34 @@ namespace RestCalculator.IntegrationTest
 
             // Assert
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
+        }
+
+        [Test]
+        public async Task BehavourControllerTest()
+        {
+            // Arrange
+            var mockCalculatorService = new Mock<ICalculator>();
+            mockCalculatorService
+                .Setup(_ => _.Add(It.IsAny<double>(), It.IsAny<double>()))
+                .ReturnsAsync(2);
+
+            var calculatorController = new CalculatorController(mockCalculatorService.Object);
+
+            // Act
+
+            var result = await calculatorController.Add(1, 1);
+            var okResult = result as OkObjectResult;
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(result, Is.Not.Null);
+                Assert.That(okResult, Is.Not.Null);
+            });
+
+            mockCalculatorService
+                .Verify(_ => _.Add(It.IsAny<double>(), It.IsAny<double>()),
+                () => Times.AtLeastOnce());
         }
     }
 }

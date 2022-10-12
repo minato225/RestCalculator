@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using RestCalculator.Services;
 using System;
+using System.Threading.Tasks;
 
 namespace RestCalculator.Test
 {
@@ -20,7 +21,7 @@ namespace RestCalculator.Test
         public double Add_Test(double a, double b)
         {
             var result = calc.Add(a, b);
-            return result;
+            return result.Result;
         }
 
         [Test]
@@ -31,7 +32,7 @@ namespace RestCalculator.Test
         public double Div_Test(double a, double b)
         {
             var result = calc.Divide(a, b);
-            return result;
+            return result.Result;
         }
 
         [Test]
@@ -42,7 +43,7 @@ namespace RestCalculator.Test
         public double Mul_Test(double a, double b)
         {
             var result = calc.Multiply(a, b);
-            return result;
+            return result.Result;
         }
 
         [Test]
@@ -53,13 +54,13 @@ namespace RestCalculator.Test
         public double Sub_Test(double a, double b)
         {
             var result = calc.Subtract(a, b);
-            return result;
+            return result.Result;
         }
 
         [Test]
         public void Divide_Zero_DivideByZeroException() =>
-            Assert.Throws<DivideByZeroException>(
-                () => calc.Divide(1, 0),
+            Assert.ThrowsAsync<DivideByZeroException>(
+                async () => await calc.Divide(1, 0),
                 message: "divisor should not be zero!");
     }
 }
