@@ -19,7 +19,7 @@ namespace RestCalculator.Controllers
         public async Task<IActionResult> Add(double a, double b)
         {
             var result = await CalculatorService.Add(a, b);
-            var calcResult = new CalculatorResult(result);
+            var calcResult = new CalculatorResult { Result = result };
             return Ok(calcResult);
         }
 
@@ -27,25 +27,26 @@ namespace RestCalculator.Controllers
         public async Task<IActionResult> Divide(double a, double b)
         {
             double result;
+            CalculatorResult calculatorResult;
 
             try
             {
                 result = await CalculatorService.Divide(a, b);
+                calculatorResult = new() { Result = result };
             }
             catch (DivideByZeroException e)
             {
-                return BadRequest(new { message = e.Message });
+                calculatorResult = new() { ErrorMessage = e.Message };
             }
 
-            var calcResult = new CalculatorResult(result);
-            return Ok(calcResult);
+            return Ok(calculatorResult);
         }
 
         [HttpGet("Sub")]
         public async Task<IActionResult> Subtract(double a, double b)
         {
             var result = await CalculatorService.Subtract(a, b);
-            var calcResult = new CalculatorResult(result);
+            var calcResult = new CalculatorResult { Result = result };
             return Ok(calcResult);
         }
 
@@ -53,7 +54,7 @@ namespace RestCalculator.Controllers
         public async Task<IActionResult> Multiply(double a, double b)
         {
             var result = await CalculatorService.Multiply(a, b);
-            var calcResult = new CalculatorResult(result);
+            var calcResult = new CalculatorResult { Result = result };
             return Ok(calcResult);
         }
     }

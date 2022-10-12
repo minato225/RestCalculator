@@ -4,10 +4,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using NUnit.Framework;
 using RestCalculator.Controllers;
+using RestCalculator.Model;
 using RestCalculator.Services;
 using System;
 using System.Linq;
 using System.Net;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace RestCalculator.IntegrationTest
@@ -56,9 +58,14 @@ namespace RestCalculator.IntegrationTest
 
             // Act
             var response = await httpClent.GetAsync("/Calculator/Div?a=1&b=1");
+            var result = await httpClent.GetFromJsonAsync<CalculatorResult>("/Calculator/Div?a=1&b=1");
 
             // Assert
-            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
+            Assert.Multiple(() =>
+            {
+                Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+                Assert.That(result.ErrorMessage, Is.Not.Null);
+            });
         }
 
         [Test]

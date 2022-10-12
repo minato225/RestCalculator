@@ -1,4 +1,4 @@
-﻿namespace RestCalculator.Model
+﻿namespace Calculator.Model
 {
     public class CalculatorResult
     {
