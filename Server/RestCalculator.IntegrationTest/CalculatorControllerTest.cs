@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Any;
 using Moq;
 using NUnit.Framework;
 using RestCalculator.Controllers;
-using RestCalculator.Model;
 using RestCalculator.Services;
 using System;
 using System.Linq;
@@ -23,6 +21,7 @@ namespace RestCalculator.IntegrationTest
             // Arrange
             var webHost = new WebApplicationFactory<Startup>()
                 .WithWebHostBuilder(_ => { });
+
             var httpClent = webHost.CreateClient();
 
             // Act
