@@ -1,16 +1,17 @@
 ﻿using Calculator.Service;
+using GalaSoft.MvvmLight;
 
 namespace Calculator.ViewModel
 {
-    public class MainWindowViewModel
+    public class MainWindowViewModel : ViewModelBase
     {
-        private readonly ICalculator _calculatorService;
+        private readonly ICalculatorService _calculatorService;
 
-        public string AddFirstArgText;
+        public string AddFirstArgText = "e";
 
         //AddEvalCommand
 
-        public MainWindowViewModel(ICalculator calculatorService) => 
+        public MainWindowViewModel(ICalculatorService calculatorService) => 
             _calculatorService = calculatorService;
 
     }

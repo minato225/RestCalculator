@@ -1,15 +1,16 @@
 ﻿<Window
-    x:Class="Calculator.MainWindow"
+    x:Class="Calculator.View.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Calculator"
+    xmlns:local="clr-namespace:Calculator.View"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="RestCalc"
     Width="500"
     Height="500"
     MinWidth="500"
     MinHeight="500"
+    DataContext="{Binding Source={StaticResource Locator}, Path=MainWindowViewModel}"
     mc:Ignorable="d">
     <Window.Resources>
         <ControlTemplate x:Key="ResultButtonTemplate" TargetType="Button">

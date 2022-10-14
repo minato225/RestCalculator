@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace Calculator.Service
 {
-    public class Calculator : ICalculator
+    public class CalculatorService : ICalculatorService
     {
-        // https://localhost:44317
         private readonly HttpClient _httpClient;
 
-        public Calculator(HttpClient httpClient) =>
+        public CalculatorService(HttpClient httpClient) =>
             _httpClient = httpClient;
 
         public async Task<CalculatorResult> Add(double a, double b) => await EvalExpression("Add", a, b);
