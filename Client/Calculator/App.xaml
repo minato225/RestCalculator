@@ -13,6 +13,10 @@
                 xmlns:vm="clr-namespace:Calculator.ViewModel"
                 x:Key="Locator"
                 d:IsDataSource="True" />
+
+            <Style TargetType="Window">
+                <Setter Property="FontSize" Value="28" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

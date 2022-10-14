@@ -34,6 +34,8 @@ namespace Calculator
         {
             services.Configure<AppSettings>(configuration.GetSection(nameof(AppSettings)));
 
+            services.AddHttpClient<ICalculatorService>();
+
             services.AddScoped<ICalculatorService, CalculatorService>();
             services.AddSingleton<MainWindowViewModel>();
             services.AddTransient<MainWindow>();

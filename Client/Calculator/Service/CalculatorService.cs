@@ -1,4 +1,5 @@
 ﻿using Calculator.Model;
+using Microsoft.Extensions.Options;
 using System;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -10,8 +11,11 @@ namespace Calculator.Service
     {
         private readonly HttpClient _httpClient;
 
-        public CalculatorService(HttpClient httpClient) =>
+        public CalculatorService(HttpClient httpClient, IOptions<AppSettings> options)
+        {
             _httpClient = httpClient;
+            _httpClient.BaseAddress = new Uri(options.Value.BasePath);
+        }
 
         public async Task<CalculatorResult> Add(double a, double b) => await EvalExpression("Add", a, b);
         public async Task<CalculatorResult> Subtract(double a, double b) => await EvalExpression("Sub", a, b);
@@ -27,7 +31,7 @@ namespace Calculator.Service
             {
                 { ErrorMessage: null } => result,
                 { ErrorMessage: not null } => throw new ArgumentException(result.ErrorMessage),
-                null => throw new ArgumentNullException(nameof(operationName), $"{operationName} return null response")
+                _ => throw new ArgumentNullException(nameof(operationName), $"{operationName} return null response")
             };
         }
     }

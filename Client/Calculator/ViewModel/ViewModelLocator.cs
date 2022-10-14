@@ -4,7 +4,7 @@ namespace Calculator.ViewModel
 {
     public class ViewModelLocator
     {
-        public MainWindowViewModel MainViewModel => 
+        public MainWindowViewModel MainWindowViewModel => 
             App.ServiceProvider.GetRequiredService<MainWindowViewModel>();
     }
 }
