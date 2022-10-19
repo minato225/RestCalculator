@@ -11,13 +11,18 @@ namespace Calculator.ViewModel
     {
         private readonly ICalculatorService _calculatorService;
 
-        private string _FirstArgText = string.Empty;
-        private string _SecondArgText = string.Empty;
-        private string _ResultText = string.Empty;
+        private string _firstArgText = string.Empty;
+        private string _secondArgText = string.Empty;
+        private string _resultText = string.Empty;
 
-        public string FirstArgText { get => _FirstArgText; set => Set(ref _FirstArgText, value); }
-        public string SecondArgText { get => _SecondArgText; set => Set(ref _SecondArgText, value); }
-        public string ResultText { get => _ResultText; set => Set(ref _ResultText, value); }
+        private string _evalErrorText = string.Empty;
+        private bool _isEvalError;
+
+        public string FirstArgText { get => _firstArgText; set => Set(ref _firstArgText, value); }
+        public string SecondArgText { get => _secondArgText; set => Set(ref _secondArgText, value); }
+        public string ResultText { get => _resultText; set => Set(ref _resultText, value); }
+        public string EvalErrorText { get => _evalErrorText; set => Set(ref _evalErrorText, value); }
+        public bool IsEvalError { get => _isEvalError; set => Set(ref _isEvalError, value); }
 
         public RelayCommand AddCommand { get; }
         public RelayCommand DivCommand { get; }
@@ -35,19 +40,37 @@ namespace Calculator.ViewModel
 
         private async Task EvalAsync(Operations operations)
         {
-            var a = int.Parse(FirstArgText);
-            var b = int.Parse(SecondArgText);
-
-            var result =  operations switch
+            try
             {
-                Operations.Add => await _calculatorService.Add(a, b),
-                Operations.Div => await _calculatorService.Divide(a, b),
-                Operations.Mul => await _calculatorService.Multiply(a, b),
-                Operations.Sub => await _calculatorService.Subtract(a, b),
-                _ => throw new NotImplementedException(),
-            };
+                var a = int.Parse(FirstArgText);
+                var b = int.Parse(SecondArgText);
 
-            ResultText = result.Result.ToString();
+                ResultText = (operations switch
+                {
+                    Operations.Add => await _calculatorService.Add(a, b),
+                    Operations.Div => await _calculatorService.Divide(a, b),
+                    Operations.Mul => await _calculatorService.Multiply(a, b),
+                    Operations.Sub => await _calculatorService.Subtract(a, b),
+                    _ => throw new ArgumentException(),
+                }).Result.ToString();
+                IsEvalError = false;
+                EvalErrorText = string.Empty;
+            }
+            catch (ArgumentNullException e)
+            {
+                IsEvalError = true;
+                EvalErrorText = e.Message;
+            }
+            catch (ArgumentException ex)
+            {
+                IsEvalError = true;
+                EvalErrorText = ex.Message;
+            }
+            catch(Exception exp)
+            {
+                IsEvalError = true;
+                EvalErrorText = exp.Message;
+            }
         }
     }
 }
